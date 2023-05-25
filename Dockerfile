@@ -1,4 +1,4 @@
-FROM remote-docker.artifactory.swisscom.com/python:3.10-alpine3.13
+FROM python:3.10-alpine3.13
 
 WORKDIR /code
 

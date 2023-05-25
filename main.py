@@ -3,20 +3,26 @@ from fastapi.responses import HTMLResponse
 
 app = FastAPI()
 
+"""
+The API loads the HTML page
+Objective: 
+Every time the page is visited, or reloaded, the function will read the file word.txt (by default with only one word HELLO)
+The function will then replace the current word in the .txt, for instance from HELLO to WORLD
+Finally, it prints the word in HTML 
+"""
 @app.get("/", response_class=HTMLResponse)
 def read_root():
+
     file_path = "word.txt"
     with open(file_path, "r+") as file:
         word = file.read()
         file.seek(0)  
         file.truncate()
-        print(word)
         if word == "" or word == "WORLD":
             word = "HELLO" 
-            file.write(word)
         else:
             word = "WORLD"
-            file.write(word)
+        file.write(word)
 
     html_content = f"""
         <html>
